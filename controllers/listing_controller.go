@@ -25,3 +25,9 @@ func GetListings(res http.ResponseWriter, req *http.Request) {
 	jsonValue, _ := json.Marshal(listing)
 	res.Write(jsonValue)
 }
+
+func GetAllListings(res http.ResponseWriter, req *http.Request) {
+	listings := services.GetAllListings()
+	jsonValue, _ := json.Marshal(listings)
+	res.Write(jsonValue)
+}

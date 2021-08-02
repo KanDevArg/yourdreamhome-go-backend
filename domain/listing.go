@@ -25,6 +25,14 @@ func GetListingsByPostalCode(postalCode string) (*Listing, error) {
 	return l, nil
 }
 
+func GetAllListings() []Listing {
+	var arr []Listing
+	for _, v := range listings {
+		arr = append(arr, *v)
+	}
+	return arr
+}
+
 type Listing struct {
 	Id       int
 	Address  string
