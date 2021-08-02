@@ -1,7 +1,7 @@
 package main
 
-import "fmt"
+import "github.com/KanDevArg/yourdreamhome/go-backend/app"
 
-func main(){
-	fmt.Println("this is the first listing api service")
+func main() {
+	app.StartApp()
 }
