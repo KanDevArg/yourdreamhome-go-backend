@@ -19,8 +19,8 @@ func GetListingsByPostalCode(postalCode string) (*Listing, error) {
 	if l == nil {
 		return nil,
 			utils.ApplicationError{
-				Message:    fmt.Sprintf("no listing found on postalcode %v", postalCode),
-				StatusCode: 100,
+				Message: fmt.Sprintf("no listing found on postalcode %v", postalCode),
+				Status:  100,
 			}
 	}
 	return l, nil

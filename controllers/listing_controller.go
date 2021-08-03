@@ -13,11 +13,10 @@ func GetListing(ctx *gin.Context) {
 	listing, err := services.GetListing(pc)
 	if err != nil {
 		errData := utils.ApplicationError{
-			Message:    err.Error(),
-			StatusCode: http.StatusNotFound,
+			Message: err.Error(),
+			Status:  http.StatusNotFound,
 		}
-
-		utils.DoResponse(ctx, http.StatusNotFound, errData)
+		utils.DoErrorResponse(ctx, errData)
 		return
 	}
 	utils.DoResponse(ctx, http.StatusOK, listing)

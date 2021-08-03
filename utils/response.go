@@ -9,3 +9,11 @@ func DoResponse(ctx *gin.Context, status int, data interface{}) {
 	}
 	ctx.JSON(status, data)
 }
+
+func DoErrorResponse(ctx *gin.Context, err ApplicationError) {
+	if ctx.GetHeader("Accept") == "application/xml" {
+		ctx.XML(err.Status, err.Error())
+		return
+	}
+	ctx.JSON(err.Status, err.Error())
+}
