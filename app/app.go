@@ -1,21 +1,21 @@
 package app
 
 import (
-	"github.com/KanDevArg/yourdreamhome/go-backend/controllers"
-	"net/http"
+	"github.com/gin-gonic/gin"
 )
 
+var (
+	router *gin.Engine
+)
+
+func init() {
+	router = gin.Default()
+}
+
 func StartApp() {
-	http.HandleFunc("/listings/postal-code", controllers.GetListings)
+	mapUrls()
 
-	http.HandleFunc("/listings", controllers.GetAllListings)
-
-	http.HandleFunc("/ping",
-		func(writer http.ResponseWriter, request *http.Request) {
-			writer.Write([]byte("Ping here!!"))
-		})
-
-	if err := http.ListenAndServe(":8080", nil); err != nil {
+	if err := router.Run(":8080"); err != nil {
 		panic(err)
 	}
 }

@@ -1,33 +1,29 @@
 package controllers
 
 import (
-	"encoding/json"
 	"github.com/KanDevArg/yourdreamhome/go-backend/services"
 	"github.com/KanDevArg/yourdreamhome/go-backend/utils"
+	"github.com/gin-gonic/gin"
 	"net/http"
 )
 
-func GetListings(res http.ResponseWriter, req *http.Request) {
-	pc := req.URL.Query().Get("postal_code")
+func GetListing(ctx *gin.Context) {
+	pc := ctx.Param("postal_code")
 
-	listing, err := services.GetListings(pc)
+	listing, err := services.GetListing(pc)
 	if err != nil {
 		errData := utils.ApplicationError{
 			Message:    err.Error(),
 			StatusCode: http.StatusNotFound,
 		}
-		res.WriteHeader(http.StatusNotFound)
-		errorObject, _ := json.Marshal(errData)
-		res.Write(errorObject)
+
+		utils.DoResponse(ctx, http.StatusNotFound, errData)
 		return
 	}
-
-	jsonValue, _ := json.Marshal(listing)
-	res.Write(jsonValue)
+	utils.DoResponse(ctx, http.StatusOK, listing)
 }
 
-func GetAllListings(res http.ResponseWriter, req *http.Request) {
+func GetAllListings(ctx *gin.Context) {
 	listings := services.GetAllListings()
-	jsonValue, _ := json.Marshal(listings)
-	res.Write(jsonValue)
+	utils.DoResponse(ctx, http.StatusOK, listings)
 }

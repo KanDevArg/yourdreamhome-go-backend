@@ -34,6 +34,7 @@ func GetAllListings() []Listing {
 		keys = append(keys, k)
 	}
 
+	//TODO: sort descending ??
 	//sort.Sort(sort.Reverse(sort.Strings(keys))
 	sort.Strings(keys)
 
@@ -48,4 +49,6 @@ type Listing struct {
 	Address  string
 	City     string
 	PostCode string
+	Lat      float64
+	Lng      float64
 }
