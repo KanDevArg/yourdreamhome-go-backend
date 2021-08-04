@@ -6,6 +6,11 @@ import (
 	"net/http"
 )
 
+func initMiddlewares() {
+	router.Use(VendorMiddleware())
+	router.Use(RequestIdMiddleware())
+}
+
 func mapUrls() {
 	router.GET("/listings/:postal_code", controllers.GetListing)
 	router.GET("/listings", controllers.GetAllListings)
